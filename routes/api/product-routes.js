@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
       include: [{ model: Category },
       {model: Tag, as: 'tags', through: ProductTag}],
     });
-    res.json(payload);
+    res.status(200).json(payload);
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
       include: [{ model: Category },
       {model: Tag, as: 'tags', through: ProductTag}],
     });
-    res.json(payload);
+    res.status(200).json(payload);
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // if no product tags, just respond
-      res.status(200).json(product);
+      res.status(200).status(200).json(product);
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
@@ -120,7 +120,7 @@ router.delete('/:id', async (req, res) => {
         }
       }
     )
-    res.json({ status: "ok" })
+    res.status(200).json({ status: "ok" })
   } catch( err ){
     res.status(500).json({ error: err.message })
   }

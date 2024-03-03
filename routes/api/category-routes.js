@@ -7,10 +7,10 @@ router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
   try {
-    const payload = await Category.findAll({
-      include: [{ model: Product }],
+    const categoryData = await Category.findAll({
+      include: [{model: Product}]
     });
-    res.json(payload);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -20,10 +20,10 @@ router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    const payload = await Category.findByPk(req.params.id, {
+    const categoryData = await Category.findByPk(req.params.id, {
       include: [{ model: Product }],
     });
-    res.json(payload);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -32,8 +32,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // create a new category
   try {
-    const payload = await Category.create(req.body)
-    res.json(payload);
+    const categoryData = await Category.create(req.body)
+    res.status(200).json(categoryData);
   } catch( err ) {
     res.status(500).json({ error: err.message })
   }
@@ -50,7 +50,7 @@ router.put('/:id', async (req, res) => {
         }
       }
     )
-    res.json(updatedResource)
+    res.status(200).json(updatedResource)
   } catch( err ){
     res.status(500).json({ error: err.message })
   }
